@@ -12,6 +12,3 @@ int main()
 	setlocale(LC_ALL, "ru");
 	work_with_trips();
 }
-
-
-

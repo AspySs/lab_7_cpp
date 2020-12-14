@@ -115,9 +115,9 @@ void answer_to_file(Array<Bus_trip>& arr) {
 	String num_head = String("Номер автобуса:");
 	String name_head = String("Пункт назначения:");
 	String time_head = String("Время отправления:");
-	stream << std::setw(10) << "|" << num_head << std::setw(24 - num_head.get_len()) << "|" << name_head << std::setw(23 - name_head.get_len()) << "|" << time_head  << std::setw(23 - time_head.get_len()) << "|"<<"\n" << std::endl;
+	stream << std::setw(10) << "|" << num_head << std::setw(24 - num_head.get_len()) << "|" << name_head << std::setw(23 - name_head.get_len()) << "|" << time_head << std::setw(23 - time_head.get_len()) << "|" << "\n" << std::endl;
 	for (int i = 0; i < size; i++) {
-		stream << std::setw(10) << "|" << arr[i].get_number() << std::setw(23 - sizeof(arr[i].get_number())/sizeof(int)) << "|" << arr[i].get_name() << std::setw(23 - arr[i].get_name().get_len()) << "|" << arr[i].get_time() << std::setw(23- arr[i].get_time().get_len()) << "|" << std::endl;
+		stream << std::setw(10) << "|" << arr[i].get_number() << std::setw(23 - sizeof(arr[i].get_number()) / sizeof(int)) << "|" << arr[i].get_name() << std::setw(23 - arr[i].get_name().get_len()) << "|" << arr[i].get_time() << std::setw(23 - arr[i].get_time().get_len()) << "|" << std::endl;
 	}
 
 }
