@@ -97,7 +97,7 @@ void sort(Array <T>& array)
 		int smallest_index = i;
 		for (int current_index = i + 1; current_index < len; ++current_index)
 		{
-			if (array[current_index] > array[smallest_index])
+			if (array[current_index].get_number() < array[smallest_index].get_number())
 				smallest_index = current_index;
 		}
 		std::swap(array[i], array[smallest_index]);
