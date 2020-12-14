@@ -21,7 +21,7 @@ input.txt:
 10 Politekhnicheskaia 16:30
 18 Akademicheskaia 10:30
 25 Begovaia 12:30
-25 Sadovaia 17:31
+28 Sadovaia 17:31
 
 console:
 input.txt
@@ -31,13 +31,13 @@ input.txt
 output.txt:
          |Номер автобуса:        |Пункт назначения:     |Время отправления:    |
 
-         |25                     |Sadovaia              |17:31                 |
          |10                     |Politekhnicheskaia    |16:30                 |
          |11                     |Oboronnaia            |14:30                 |
          |12                     |Deviatkino            |14:22                 |
-         |25                     |Begovaia              |12:30                 |
          |15                     |Murino                |11:30                 |
          |18                     |Akademicheskaia       |10:30                 |
+         |25                     |Begovaia              |12:30                 |
+         |28                     |Sadovaia              |17:31                 |
          
 console:
 Введите файл, из которого будет происходить ввод
@@ -49,7 +49,7 @@ input.txt
 |10|Politekhnicheskaia|16:30|
 |18|Akademicheskaia|10:30|
 |25|Begovaia|12:30|
-|25|Sadovaia|17:31|
+|28|Sadovaia|17:31|
 
 
 
