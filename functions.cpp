@@ -4,7 +4,6 @@
 #include "Class.h"
 #include "functions.h"
 #include "Array.h"
-#include <iomanip>
 
 int str_to_int(String& str) {
 	int len = str.get_len();
@@ -108,7 +107,11 @@ void sort(Array <T>& array)
 void print_array(Array <Bus_trip>& arr) {
 	int size = arr.get_size();
 	for (int i = 0; i < size; i++) {
-		std::cout << arr[i] << std::setw(10) << std::endl;
+		std::cout << arr[i];
+		for (int j = 0; j < 10; j++) {
+			std::cout << " ";
+		}
+		std::cout << std::endl;
 	}
 }
 void answer_to_file(Array<Bus_trip>& arr) {
@@ -117,9 +120,50 @@ void answer_to_file(Array<Bus_trip>& arr) {
 	String num_head = String("Номер автобуса:");
 	String name_head = String("Пункт назначения:");
 	String time_head = String("Время отправления:");
-	stream << std::setw(10) << "|" << num_head << std::setw(24 - num_head.get_len()) << "|" << name_head << std::setw(23 - name_head.get_len()) << "|" << time_head << std::setw(23 - time_head.get_len()) << "|" << "\n" << std::endl;
+
+	for (int j = 0; j < 10; j++) {
+		stream << " ";
+	}
+	stream << "|";
+	stream << num_head;
+	for (int j = 0; j < (24 - num_head.get_len()); j++) {
+		stream << " ";
+	}
+	stream << "|";
+	stream << name_head;
+	for (int j = 0; j < (23 - name_head.get_len()); j++) {
+		stream << " ";
+	}
+	stream << "|";
+	stream << time_head;
+	for (int j = 0; j < (23 - time_head.get_len()); j++) {
+		stream << " ";
+	}
+	stream << "|";
+	stream << "\n";
+	stream << std::endl;
+	
 	for (int i = 0; i < size; i++) {
-		stream << std::setw(10) << "|" << arr[i].get_number() << std::setw(23 - sizeof(arr[i].get_number()) / sizeof(int)) << "|" << arr[i].get_name() << std::setw(23 - arr[i].get_name().get_len()) << "|" << arr[i].get_time() << std::setw(23 - arr[i].get_time().get_len()) << "|" << std::endl;
+		for (int j = 0; j < 10; j++) {
+			stream << " ";
+		}
+		stream << "|";
+		stream << arr[i].get_number();
+		for (int j = 0; j < (23 - sizeof(arr[i].get_number()) / sizeof(int)); j++) {
+			stream << " ";
+		}
+		stream << "|";
+		stream << arr[i].get_name();
+		for (int j = 0; j < (23 - arr[i].get_name().get_len()); j++) {
+			stream << " ";
+		}
+		stream << "|";
+		stream << arr[i].get_time();
+		for (int j = 0; j < (23 - arr[i].get_time().get_len()); j++) {
+			stream << " ";
+		}
+		stream << "|";
+		stream << std::endl;
 	}
 
 }
