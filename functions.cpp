@@ -4,6 +4,7 @@
 #include "Class.h"
 #include "functions.h"
 #include "Array.h"
+bool ERROR = false;
 
 int str_to_int(String& str) {
 	int len = str.get_len();
@@ -33,21 +34,16 @@ int str_len(const char* ch) {
 	return i;
 }
 
-int validate_number(int number) {
-	if (number >= 0) {
-		return number;
-	}
-	else {
-		std::cout << "Найдена ошибка в записи данных файла!" << std::endl;
-	}
-	return number;
-}
 
 String validate_time(String time) {
 	if (((str_to_int(time) / 100 <= 24) && (str_to_int(time) / 100 >= 0)) && (((str_to_int(time) % 100 <= 59) && (str_to_int(time) % 100 >= 0)))) {
 		return time;
 	}
 	else {
+		if (!ERROR) {
+			std::cout << "Обнаружена некорректная информация в файле данных!" << std::endl;
+			ERROR = true;
+		}
 		time = String("###");
 	}
 	return time;
@@ -81,9 +77,10 @@ Array <Bus_trip> read_file() {
 	for (int i = 0; i < size; i++) {
 		stream >> arr[i];
 	}
+	std::cout << std::endl;
 	stream.close();
 	sort(arr);
-	print_array(arr);
+	//print_array(arr);
 	return arr;
 }
 template <class T>
@@ -104,6 +101,7 @@ void sort(Array <T>& array)
 		std::swap(array[i], array[smallest_index]);
 	}
 }
+/*
 void print_array(Array <Bus_trip>& arr) {
 	int size = arr.get_size();
 	for (int i = 0; i < size; i++) {
@@ -114,6 +112,7 @@ void print_array(Array <Bus_trip>& arr) {
 		std::cout << std::endl;
 	}
 }
+*/
 void answer_to_file(Array<Bus_trip>& arr) {
 	std::ofstream stream("output.txt");
 	int size = arr.get_size();
@@ -148,8 +147,9 @@ void answer_to_file(Array<Bus_trip>& arr) {
 			stream << " ";
 		}
 		stream << "|";
-		stream << arr[i].get_number();
-		for (int j = 0; j < (23 - sizeof(arr[i].get_number()) / sizeof(int)); j++) {
+		stream << validate_int(arr[i].get_number());
+
+		for (int j = 0; j < (24 - validate_int(arr[i].get_number()).get_len()); j++) {
 			stream << " ";
 		}
 		stream << "|";
@@ -171,7 +171,7 @@ void find_min_number(Array<Bus_trip>& trips) {
 	int size = trips.get_size();
 	int min = trips[0].get_number();
 	for (int i = 0; i < size; i++) {
-		if (trips[i] < min) {
+		if (trips[i] < min && trips[i].get_number() >=0) {
 			min = trips[i].get_number();
 		}
 	}
@@ -183,5 +183,42 @@ void work_with_trips() {
 	find_min_number(trips);
 	sort(trips);
 	answer_to_file(trips);
+}
+
+String validate_int(int inp) {
+	String out;
+	bool correct = false;
+	if (inp>=0) {
+		correct = true;
+		String t_out = int_to_char(inp);
+		return t_out;
+	}
+	if (!correct) {
+		if (!ERROR) {
+			std::cout << "Обнаружена некорректная информация в файле данных!" << std::endl;
+			ERROR = true;
+		}
+		out = "###";
+	}
+	return out;
+}
+char* int_to_char(int inp) {
+	int size = int_size(inp);
+	char* ch = new char[size+1];
+	for (int i = 1; i <= size; i++) {
+		ch[size-i] = inp % 10 + '0';
+		inp = inp / 10;
+	}
+	ch[size] = '\0';
+	return ch;
+}
+int int_size(int inp) {
+	int temp = inp;
+	int size = 0;
+	while (temp != 0) {
+		temp = temp / 10;
+		size++;
+	}
+	return size;
 }
 

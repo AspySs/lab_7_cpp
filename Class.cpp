@@ -93,19 +93,19 @@ std::istream& operator >> (std::istream& stream, Bus_trip& trip) {
 	Bus_trip temp;
 	int num = 0;
 	stream >> num;
+	String num_out = validate_int(num);
 	stream >> temp.destination_;
 	stream >> temp.time_;
 	temp.set_number(num);
 	int number = temp.get_number();
-	number = validate_number(number);
 	String destination = temp.destination_;
 	String time = validate_time(temp.time_);
-	std::cout << "|" << number << "|" << destination << "|" << time << "|" << "\n";
+	std::cout << "|" << num_out << "|" << destination << "|" << time << "|" << "\n";
 	trip = Bus_trip(number, destination, time);
 	return stream;
 }
 std::ostream& operator << (std::ostream& stream, const Bus_trip& trip) {
-	//stream << "|" << trip.number_ << "|" << trip.destination_ << "|" << trip.time_ << "|" << "\n";
+	stream << "|" << trip.number_ << "|" << trip.destination_ << "|" << trip.time_ << "|" << "\n";
 	return stream;
 }
 
